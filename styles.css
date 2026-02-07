@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Combo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ff566165 0%, #ffb6d96c 50%, #ffffff26 100%), url('./samantha.png');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;    
+}
+
+.background {
+    position: fixed;
+    /* top: 0;
+    left: 0; */
+    /* height: 100vh; */
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+.content {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    background: rgba(255, 255, 255, 0.781);
+    /* backdrop-filter: blur(3px); */
+    /* -webkit-backdrop-filter: blur(30px); */
+    border: 1.5px solid rgba(77, 77, 77, 0.426);
+    border-radius: 40px;
+    padding: 80px 60px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.318), inset 0 0 32px rgba(255, 255, 255, 0.714);
+}
+
+.name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ff0040;
+    animation: slideDown 0.8s ease-out;
+    font-family: "Grand Hotel", cursive;
+}
+
+.question {
+    font-size: 3rem;
+    font-weight: 550;
+    margin-bottom: 30px;
+    color: #ff5871;
+    animation: slideDown 0.8s ease-out 0.2s both;
+    font-family: passions conflict, cursive;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    animation: slideDown 0.8s ease-out 0.4s both;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+button {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.yes-btn {
+    background: rgba(220, 20, 60, 0.6);
+    border: 1.5px solid rgba(220, 20, 60, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.yes-btn:hover {
+    background: rgba(220, 20, 60, 0.7);
+    box-shadow: 0 12px 40px rgba(220, 20, 60, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.no-btn {
+    background: rgba(233, 30, 99, 0.5);
+    border: 1.5px solid rgba(233, 30, 99, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.no-btn:hover {
+    background: rgba(233, 30, 99, 0.6);
+    box-shadow: 0 12px 40px rgba(233, 30, 99, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Randomly generated No-sequence buttons */
+.no-random {
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1.2px solid rgba(255,255,255,0.45);
+    color: #dc143c; /* cherry red text */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12), inset 0 0 12px rgba(255,255,255,0.2);
+    cursor: pointer;
+}
+
+.no-random:hover {
+    background: rgba(255,255,255,0.32);
+    transform: translateY(-2px);
+}
+
+/* Heart animations */
+.hearts-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.heart {
+    position: fixed;
+    font-size: 3rem;
+    bottom: -50px;
+    pointer-events: none;
+    animation: float-up 3s ease-in forwards;
+}
+
+@keyframes float-up {
+    0% {
+        bottom: -50px;
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 100vh;
+        opacity: 0;
+        transform: translateX(var(--tx, 0)) scale(0.5);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile overlay when opened on small devices */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
+    padding: 20px;
+    text-align: center;
+}
+
+.mobile-overlay .message {
+    max-width: 520px;
+    background: rgba(255,255,255,0.9);
+    padding: 28px 32px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.06);
+    font-size: 1.1rem;
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+@media (max-width: 520px) {
+    .mobile-overlay .message { font-size: 1rem; }
+}
+
+/* Confession page styles */
+.confession-content {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 60px 40px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    max-width: 600px;
+    margin: 0 auto;
+    animation: slideDown 0.8s ease-out;
+    z-index: 10;
+    position: relative;
+}
+
+.confession-content h1 {
+    font-size: 2.5rem;
+    color: #ec4899;
+    margin-bottom: 20px;
+    font-family: "Combo", system-ui;
+}
+
+.confession-content p {
+    font-size: 3vh;
+    color: #333;
+    /* line-height: 1.8; */
+    margin-bottom: 15px;
+    /* font-family:Imperial Script, cursive; */
+    font-family: "Rochester", cursive;
+    font-weight: 800;
+}
+
+.confession-hearts {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    font-size: 2rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}

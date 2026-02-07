@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine Confession</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="hearts-container"></div>
+    
+    <div class="confession-content">
+        <h1>You make me smile 💕</h1>
+        <p>
+            From the moment we became friends actually, I knew there was something special about you. Eventually I fell in love, every day with you is a gift, and I can't imagine my life without your laughter, your kindness, and your beautiful presence.
+        </p>
+        <p>
+            You bring colors to my world in ways I never knew were possible. The way you light up a room, the way you care for others, and the way you inspire me to be a better person—it all makes my heart skip a beat.
+        </p>
+        <p>
+            I want to spend every Valentine's Day with you, and every day after that. Thank you for being you, and thank you for being mine.
+        </p>
+        <div class="confession-hearts">
+            <span>❤️</span>
+            <span>💕</span>
+            <span>💖</span>
+            <span>💗</span>
+            <span>❤️</span>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.querySelector('.hearts-container');
+            const heartCount = 20;
+
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '❤️';
+                    
+                    const randomX = Math.random() * window.innerWidth;
+                    const randomTx = (Math.random() - 0.5) * 200;
+                    
+                    heart.style.left = randomX + 'px';
+                    heart.style.setProperty('--tx', randomTx + 'px');
+                    
+                    container.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            // Continuously create hearts
+            setInterval(createHearts, 4000);
+        });
+    </script>
+</body>
+</html>
