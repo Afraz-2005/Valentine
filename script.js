@@ -40,59 +40,79 @@ function showContent() {
     }, 2000);
 }
 
-// No button interactions: sequential random buttons flow
-let sequenceStarted = false;
+// No button interactions: floating frosted content boxes
+let noBoxCount = 0;
+const noBoxStatements = [
+    [
+        "You sure? Hearts are watching.",
+        "Think about you throwing a microwave at me, then taking care of me all by yourself",
+        "That would be a cute story to tell our grandkids."
+    ],
+    [
+        "Our favorite song on repeat.",
+        "Imagine us sharing the earphones, walking holding hands, and laughing together.",
+        "Are you really going to say no?"
+    ],
+    [
+        "Good vibes only. Be my reason to smile.",
+        "You + me = best story.",
+        "Last chance before I surrender... maybe."
+    ]
+];
 
-function createRandomButton(text, onClick) {
-    const btn = document.createElement('button');
-    btn.className = 'no-random';
-    btn.textContent = text;
-    btn.style.position = 'fixed';
-    const w = Math.min(200, window.innerWidth * 0.35);
-    const h = 50;
+function createFloatingBox(statements, options = {}) {
+    // create an overlay that blurs/dims the page, then center the floating box inside it
+    const overlay = document.createElement('div');
+    overlay.className = 'floating-overlay';
 
-    const container = document.querySelector('.content');
-    const rect = container ? container.getBoundingClientRect() : { left: window.innerWidth/2 - 100, right: window.innerWidth/2 + 100, top: window.innerHeight/2 - 100, bottom: window.innerHeight/2 + 100 };
+    const box = document.createElement('div');
+    box.className = 'floating-box';
 
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-    const rand = (a, b) => Math.random() * (b - a) + a;
+    const stm = document.createElement('div');
+    stm.className = 'floating-statements';
+    statements.forEach(s => {
+        const p = document.createElement('p');
+        p.textContent = s;
+        stm.appendChild(p);
+    });
+    box.appendChild(stm);
 
-    // choose a side around the container: top, bottom, left, right
-    const sides = ['top', 'bottom', 'left', 'right'];
-    const side = sides[Math.floor(Math.random() * sides.length)];
+    const actions = document.createElement('div');
+    actions.className = options.final ? 'final-buttons' : 'floating-actions';
 
-    let randomX, randomY;
-    if (side === 'top') {
-        randomX = rand(rect.left - w + 20, rect.right - 20);
-        randomX = clamp(randomX, 10, window.innerWidth - w - 10);
-        randomY = clamp(rect.top - h - 20 - rand(0, 120), 10, window.innerHeight - h - 10);
-    } else if (side === 'bottom') {
-        randomX = rand(rect.left - w + 20, rect.right - 20);
-        randomX = clamp(randomX, 10, window.innerWidth - w - 10);
-        randomY = clamp(rect.bottom + 20 + rand(0, 120), 10, window.innerHeight - h - 10);
-    } else if (side === 'left') {
-        randomX = clamp(rect.left - w - 20 - rand(0, 120), 10, window.innerWidth - w - 10);
-        randomY = rand(rect.top - 10, rect.bottom - h + 10);
-        randomY = clamp(randomY, 10, window.innerHeight - h - 10);
-    } else { // right
-        randomX = clamp(rect.right + 20 + rand(0, 120), 10, window.innerWidth - w - 10);
-        randomY = rand(rect.top - 10, rect.bottom - h + 10);
-        randomY = clamp(randomY, 10, window.innerHeight - h - 10);
+    if (options.final) {
+        const yes = document.createElement('button');
+        yes.className = 'yes';
+        yes.textContent = 'Yes';
+        yes.addEventListener('click', () => { window.location.href = 'confession.html'; });
+
+        const obv = document.createElement('button');
+        obv.className = 'obvious';
+        obv.textContent = 'Obviously';
+        obv.addEventListener('click', () => { window.location.href = 'confession.html'; });
+
+        actions.appendChild(yes);
+        actions.appendChild(obv);
+    } else {
+        const close = document.createElement('button');
+        close.className = 'btn';
+        close.textContent = 'Close';
+        close.addEventListener('click', () => { overlay.classList.remove('show'); setTimeout(() => overlay.remove(), 260); });
+        actions.appendChild(close);
     }
 
-    btn.style.left = randomX + 'px';
-    btn.style.top = randomY + 'px';
-    btn.style.zIndex = 1000;
-    document.body.appendChild(btn);
+    box.appendChild(actions);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
 
-    const handler = (e) => {
-        e.stopPropagation();
-        btn.removeEventListener('click', handler);
-        if (typeof onClick === 'function') onClick(btn);
-    };
+    // show with animation: reveal overlay and box
+    requestAnimationFrame(() => {
+        overlay.classList.add('show');
+        box.classList.add('show');
+    });
 
-    btn.addEventListener('click', handler);
-    return btn;
+    // return overlay so caller can remove it if needed
+    return overlay;
 }
 
 function setupButtons() {
@@ -104,26 +124,18 @@ function setupButtons() {
     });
 
     noBtn.addEventListener('click', () => {
-        if (sequenceStarted) return;
-        sequenceStarted = true;
-        // hide the original No button while sequence runs
-        noBtn.style.visibility = 'hidden';
-
-        // Step 1: show "are you sure?"
-        const first = createRandomButton('are you sure?', (firstBtn) => {
-            // remove first button and show second
-            firstBtn.remove();
-
-            // Step 2: show "try again kid"
-            const second = createRandomButton('try again kid', (secondBtn) => {
-                // clicking second removes it and ensures only Yes remains
-                secondBtn.remove();
-                // remove the original No button entirely
-                if (noBtn && noBtn.parentNode) noBtn.parentNode.removeChild(noBtn);
-                // sequence finished
-                sequenceStarted = false;
-            });
-        });
+        // show up to 3 floating boxes, each with 3 statements
+        if (noBoxCount < 3) {
+            createFloatingBox(noBoxStatements[noBoxCount]);
+            noBoxCount++;
+        } else {
+            // final box with options
+            createFloatingBox([
+                'Nice try kid, you know you cant reject me, and you still have two options to choose from 😎'
+            ], { final: true });
+            // remove the no button so user chooses from final box
+            if (noBtn && noBtn.parentNode) noBtn.parentNode.removeChild(noBtn);
+        }
     });
 }
 

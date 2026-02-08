@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Valentine's Day</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="hearts-container"></div>
+    
+    <div class="gallery-container">
+        <div class="book">
+            <div class="book-pages" id="book-pages">
+                <!-- Page 0 (Cover) -->
+                <div class="page active" data-page="0">
+                    <div class="page-content cover">
+                        <h1>Our Story</h1>
+                        <p class="back-quote">My quotes and your spledndid captures</p>
+                        <p>💕</p>
+                    </div>
+                </div>
+                
+                <!-- Page 1 -->
+                <div class="page" data-page="1">
+                    <div class="page-content">
+                        <img src="mem1.jpg" alt="Memory 1">
+                        <div class="photo-comment right">Our first pictured memory together. (i look kinda autistic)</div>
+                    </div>
+                </div>
+                
+                <!-- Page 2 -->
+                <div class="page" data-page="2">
+                    <div class="page-content">
+                        <img src="mem6.jpg" alt="Memory 2">
+                        <div class="photo-comment left">I could look into your eyes all day long.</div>
+                    </div>
+                </div>
+                
+                <!-- Page 3 -->
+                <div class="page" data-page="3">
+                    <div class="page-content">
+                        <img src="mem3.jpg" alt="Memory 3">
+                        <div class="photo-comment right">Why are you so cute & perfect?</div>
+                    </div>
+                </div>
+                
+                <!-- Page 4 -->
+                <div class="page" data-page="4">
+                    <div class="page-content">
+                        <img src="mem12.jpg" alt="Memory 4">
+                        <div class="photo-comment left">Cutie patootie</div>
+                    </div>
+                </div>
+                
+                <!-- Page 5 -->
+                <div class="page" data-page="5">
+                    <div class="page-content">
+                        <img src="mem5.jpg" alt="Memory 5">
+                        <div class="photo-comment right">You send me fit checks, and my heart forgets how to behave.</div>
+                    </div>
+                </div>
+                
+                <!-- Page 6 -->
+                <div class="page" data-page="6">
+                    <div class="page-content">
+                        <img src="mem7.jpg" alt="Memory 6">
+                        <div class="photo-comment left">My eyes are bound to stare back at this one.</div>
+                    </div>
+                </div>
+                
+                <!-- Page 7 -->
+                <div class="page" data-page="7">
+                    <div class="page-content">
+                        <img src="mem8.jpg" alt="Memory 7">
+                        <div class="photo-comment right">Slayed 10/10 baddie, only mine.</div>
+                    </div>
+                </div>
+                
+                <!-- Page 8 -->
+                <div class="page" data-page="8">
+                    <div class="page-content">
+                        <img src="mem9.jpg" alt="Memory 8">
+                        <div class="photo-comment left">I'm gonna use this one as a stikcer 😁.</div>
+                    </div>
+                </div>
+                
+                <!-- Page 9 -->
+                <div class="page" data-page="9">
+                    <div class="page-content">
+                        <img src="mem11.jpg" alt="Memory 9">
+                        <div class="photo-comment right">To me, you are The Prettiest girl ever. Everything of yours feel perfect. 💖</div>
+                    </div>
+                </div>
+                
+                <!-- Page 10 (Back Cover) -->
+                <div class="page" data-page="10">
+                    <div class="page-content cover">
+                        <h2>Forever & Always</h2>
+                        <p>❤️</p>
+                        <p class="back-quote">Lets choose to stay, through all the storms. <br>We shall break the problems, not ourselves.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-controls">
+                <button class="prev-btn" onclick="prevPage()">← Previous</button>
+                <span class="page-counter"><span id="current-page">1</span> / <span id="total-pages">11</span></span>
+                <button class="next-btn" onclick="nextPage()">Next →</button>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">◀️ Experience Again ✨</a>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
