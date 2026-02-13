@@ -212,7 +212,7 @@
 
     </style>
 </head>
-<body>
+<body id="start">
 
     <div id="loader">
         <div class="heartbeat-container">
@@ -240,17 +240,33 @@
             <div id="text-name">Samantha Rahman</div>
         </div>
 
+
     </div>
 
+    <audio id="mysong">
+        <source src="./music.mp3" type="audio/mp3">
+    </audio>
+
+
     <script>
+        
+
         // --- TIMING LOGIC ---
         window.onload = function() {
+            const music = document.getElementById("mysong");
             const loader = document.getElementById('loader');
             const mainContent = document.getElementById('main-content');
             const brushText = document.getElementById('brushText');
             const textIly = document.getElementById('text-ily');
             const textName = document.getElementById('text-name');
+            const start = document.getElementById('start');
 
+            
+            loader.onmouseover = function() {
+              
+                music.play();
+            }
+            
             // 1. Wait 3 seconds for heartbeat loader
             setTimeout(() => {
                 loader.style.opacity = '0';
